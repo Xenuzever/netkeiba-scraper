@@ -1,0 +1,2 @@
+# netkeiba-scraper
+For java.
