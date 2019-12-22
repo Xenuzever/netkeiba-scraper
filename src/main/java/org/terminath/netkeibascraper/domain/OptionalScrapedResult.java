@@ -9,6 +9,21 @@ public class OptionalScrapedResult {
 
   private ScrapedResult t;
 
+  public ScrapedResult get() {
+    if (Objects.isNull(t)) {
+      throw new NullPointerException();
+    }
+    return t;
+  }
+
+  public JRAScrapedResult getAsJRA() {
+    return (JRAScrapedResult) get();
+  }
+
+  public NARScrapedResult getAsNAR() {
+    return (NARScrapedResult) get();
+  }
+
   public boolean isPresent() {
     return Objects.nonNull(t);
   }
@@ -26,14 +41,14 @@ public class OptionalScrapedResult {
   }
 
   public boolean isPresentNAR() {
-    return isPresent() && isJRA();
+    return isPresent() && isNAR();
   }
 
   public static OptionalScrapedResult empty() {
     return of(null);
   }
 
-  public static <T extends ScrapedResult<?, ?>> OptionalScrapedResult of(T t) {
+  public static <T extends ScrapedResult> OptionalScrapedResult of(T t) {
     OptionalScrapedResult opt = new OptionalScrapedResult();
     opt.t = t;
     return opt;
